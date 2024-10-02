@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Services\ServiceData;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
@@ -95,5 +96,28 @@ class AuthController extends Controller
             'message' => 'Berhasil logout',
         ];
         return response()->json($data, Response::HTTP_OK);
+    }
+
+    // profile
+    public function bio()
+    {
+        $nama = ServiceData::biodata['name'];
+        $email = ServiceData::biodata['email'];
+
+        $serviceData = new ServiceData();
+        $perkenalan = $serviceData->namaSaya('Ihsan Miftahul Huda', 'Bandung');
+        $pelatihan = $serviceData->namaPelatihan('Rest API', 'Inixindo', 2024);
+        $data = [
+            'status' => Response::HTTP_OK,
+            'message' => 'Detail biodata',
+            'ini env' => env('PELATIHAN'),
+            'data' => [
+                'name' => $nama,
+                'email' => $email,
+            ],
+            'hai' => $perkenalan,
+            'pelatihan' => $pelatihan,
+        ];
+        return response()->json($data);
     }
 }

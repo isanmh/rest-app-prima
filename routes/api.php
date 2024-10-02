@@ -44,4 +44,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('users/logout', [AuthController::class, 'logout']);
 });
 
+// Pemanggilan Global
+Route::get('bio', [AuthController::class, 'bio']);
+
 // JWT Auth

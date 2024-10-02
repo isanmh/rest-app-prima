@@ -62,4 +62,68 @@ JWT_SECRET=secret
 cara membuat middleware :
 php artisan make:middleware CustomHeader
 
-masuk kernel.php
+- masuk kernel.php :
+protected $routeMiddleware = [
+    ...
+    'snap-bi' => \App\Http\Middleware\CustomHeader::class,
+];
+
+- setting AuthController Header:
+public const Header = [
+        'X-PARTNER-ID' => 'INIXINDO',
+        'X-TIMESTAMP' => '2024-10-02',
+        'X-SIGNATURE' => '123456'
+];
+
+- setting di CustomHeader.php :
+public function handle(Request $request, Closure $next): Response
+    {
+        // custom header
+        $ah = AuthController::Header;
+        $res1 = $request->header('X-PARTNER-ID');
+        $res2 = $request->header('X-TIMESTAMP');
+        $res3 = $request->header('X-SIGNATURE');
+
+        // logika header custom
+        if (
+            $res1 === $ah['X-PARTNER-ID']
+            && $res2 === $ah['X-TIMESTAMP']
+            && $res3 === $ah['X-SIGNATURE']
+        ) {
+            return $next($request);
+        } else {
+            // jika salah satu header tidak sesuai
+            return response()->json([
+                'status' => 503,
+                'message' => 'Silahkan cek kembali header custom Anda',
+            ], 503);
+        }
+    }
+
+- setting route :
+Route::get('/test-api', function () {
+    return response()->json([
+        'status' => 200,
+        'message' => 'Hai, ini adalah test API',
+    ]);
+})->middleware(['auth:api', 'snap-bi']);
+
+=========L5 Swagger=========
+cara membuat L5 Swagger :
+1. composer require darkaonline/l5-swagger
+2. php artisan vendor:publish --provider "L5Swagger\L5SwaggerServiceProvider"
+3. tambahkan @OA\Info di controller :
+/**
+ * @OA\Info(
+ *      version="1.0.0",
+ *      title="Laravel Swagger API Documentation",
+ *      description="L5 Swagger OpenApi description",
+ *      @OA\Contact(
+ *          email="
+ *      ),
+ * )
+*/
+
+4. php artisan l5-swagger:generate
+5. contoh example anotation :
+https://github.com/isanmh/swagger-anotations

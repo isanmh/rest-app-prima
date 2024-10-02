@@ -37,4 +37,6 @@ php artisan db:seed --class=ProductSeeder
 cara migrate :
 php artisan migrate:fresh
 
+cara membuat middleware laravel :
+php artisan make:controller AuthController
 

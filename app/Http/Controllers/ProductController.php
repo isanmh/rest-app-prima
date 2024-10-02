@@ -10,14 +10,18 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
-        $data = [
-            'status' => 200,
-            'message' => 'Data produk berhasil diambil',
-            'data' => $products
-        ];
+        // $products = Product::all();
 
-        return response()->json($data, Response::HTTP_OK);
+        // paginate HATEOAS
+        $products = Product::paginate(10);
+
+        // $data = [
+        //     'status' => 200,
+        //     'message' => 'Data produk berhasil diambil',
+        //     'data' => $products
+        // ];
+
+        return response()->json($products, Response::HTTP_OK);
     }
 
     // detail product

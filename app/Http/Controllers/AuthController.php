@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    // global header
+    public const header = [
+        'name' => 'Ihsan'
+    ];
+
     // register
     public function register(Request $request)
     {

@@ -40,3 +40,20 @@ php artisan migrate:fresh
 cara membuat middleware laravel :
 php artisan make:controller AuthController
 
+============JWT AUTH==========
+Cara membuat JWT Auth :
+1. composer require tymon/jwt-auth
+2. php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
+3. php artisan jwt:secret
+4. tambahkan di .env :
+JWT_SECRET=secret
+5. tambahkan di config/app.php :
+'providers' => [
+    ...
+    Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+],
+'aliases' => [
+    ...
+    'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
+    'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
+],

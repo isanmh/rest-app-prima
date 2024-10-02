@@ -29,6 +29,7 @@ Route::get('/test-api', function () {
 })->middleware('auth:sanctum');
 
 // Endpoint API Products
+Route::get('products', [ProductController::class, 'index']);
 Route::get('products/{id}', [ProductController::class, 'show']);
 Route::post('products', [ProductController::class, 'store']);
 Route::put('products/{id}', [ProductController::class, 'update']);
@@ -39,7 +40,8 @@ Route::post('users/register', [AuthController::class, 'register']);
 Route::post('users/login', [AuthController::class, 'login']);
 // middleware auth:sanctum group
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::get('products', [ProductController::class, 'index']);
     Route::get('user', [AuthController::class, 'user']);
     Route::post('users/logout', [AuthController::class, 'logout']);
 });
+
+// JWT Auth

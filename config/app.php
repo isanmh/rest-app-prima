@@ -173,6 +173,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         // untuk JWT
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+        // swagger
+        L5Swagger\L5SwaggerServiceProvider::class,
     ])->toArray(),
 
     /*

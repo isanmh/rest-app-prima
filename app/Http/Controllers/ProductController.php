@@ -8,6 +8,32 @@ use Illuminate\Http\Response;
 
 class ProductController extends Controller
 {
+    /**
+     * @OA\Get(
+     *      path="/api/products",
+     *      operationId="index",
+     *      tags={"Product"},
+     *      summary="Get all products",
+     *      description="Get all products",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Success",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="status", type="integer", example=200),
+     *              @OA\Property(property="message", type="string", example="Get All products"),
+     *              @OA\Property(property="data", type="array",
+     *              @OA\Items(
+     *              @OA\Property(property="id", type="integer", example=1),
+     *              @OA\Property(property="name", type="string", example="Product 1"),
+     *              @OA\Property(property="price", type="integer", example=10000),
+     *              @OA\Property(property="description", type="string", example="Description product 1"),
+     *              @OA\Property(property="image", type="string", example="image.jpg"),
+     *              )
+     *            )
+     *        )
+     *     ),
+     * )
+     */
     public function index()
     {
         // $products = Product::all();

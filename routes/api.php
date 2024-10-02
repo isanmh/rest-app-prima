@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AuthJwtController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -48,3 +49,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
 Route::get('bio', [AuthController::class, 'bio']);
 
 // JWT Auth
+Route::post('jwt/register', [AuthJwtController::class, 'register']);
+Route::post('jwt/login', [AuthJwtController::class, 'login']);
+// JWT middleware
+Route::middleware(['auth:api'])->group(function () {
+    Route::get('jwt/profile', [AuthJwtController::class, 'profile']);
+    Route::post('jwt/refresh', [AuthJwtController::class, 'refresh']);
+});

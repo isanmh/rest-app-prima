@@ -58,6 +58,32 @@ class AuthJwtController extends Controller
         ]);
     }
     // profile
+    public function profile()
+    {
+        $profile = auth()->user();
+        return response()->json([
+            'status' => Response::HTTP_OK,
+            'message' => 'Profile user',
+            'data' => $profile
+        ]);
+    }
     // refresh Token
+    public function refresh()
+    {
+        $newToken = auth()->refresh();
+        return response()->json([
+            'status' => Response::HTTP_OK,
+            'message' => 'New token generated',
+            'token' => $newToken
+        ]);
+    }
     // logout
+    public function logout()
+    {
+        auth()->logout();
+        return response()->json([
+            'status' => Response::HTTP_OK,
+            'message' => 'Logout berhasil',
+        ]);
+    }
 }

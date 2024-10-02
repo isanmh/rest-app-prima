@@ -1,0 +1,40 @@
+Extension untuk Training :
+- Auto Close Tag
+- Auto Rename Tag
+- auto rename tag
+- Auto Import
+- CodeSnap
+- Color Highlight
+- CSS Peek
+- DotENV
+- Laravel Extension Pack
+- Live Server
+- Path IntelliSense
+- PHP Extension Pack
+- Prettierr - Code formatter
+- vscode-icons
+
+cara membuat database di Laravel :
+- buat database di phpmyadmin/laragon
+- setting di .env
+
+cara membuat cotroller, model, migration, factory :
+php artisan make:model Product -mc
+
+php artisan make:controller ProductController
+php artisan make:migration create_products_table
+
+cara melakukan migrate :
+php artisan migrate
+
+buat factory & seeder :
+php artisan make:factory ProductFactory
+php artisan make:seeder ProductSeeder
+
+cara menjalankan seeder :
+php artisan db:seed --class=ProductSeeder
+
+cara migrate :
+php artisan migrate:fresh
+
+

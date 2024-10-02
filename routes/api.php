@@ -16,9 +16,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 // Test API
 Route::get('/test-api', function () {
@@ -26,10 +26,9 @@ Route::get('/test-api', function () {
         'status' => 200,
         'message' => 'Hai, ini adalah test API',
     ]);
-});
+})->middleware('auth:sanctum');
 
 // Endpoint API Products
-Route::get('products', [ProductController::class, 'index']);
 Route::get('products/{id}', [ProductController::class, 'show']);
 Route::post('products', [ProductController::class, 'store']);
 Route::put('products/{id}', [ProductController::class, 'update']);
@@ -38,3 +37,9 @@ Route::delete('products/{id}', [ProductController::class, 'destroy']);
 // Auth Sanctum
 Route::post('users/register', [AuthController::class, 'register']);
 Route::post('users/login', [AuthController::class, 'login']);
+// middleware auth:sanctum group
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('products', [ProductController::class, 'index']);
+    Route::get('user', [AuthController::class, 'user']);
+    Route::post('users/logout', [AuthController::class, 'logout']);
+});

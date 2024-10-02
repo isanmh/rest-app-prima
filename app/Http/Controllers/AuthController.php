@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -37,7 +38,37 @@ class AuthController extends Controller
         return response()->json($data, Response::HTTP_CREATED);
     }
     // login
-    public function login() {}
+    public function login(Request $request)
+    {
+        // validasi request
+        $input = $request->validate([
+            'email' => 'required|string|email',
+            'password' => 'required|string',
+        ]);
+
+        // authentication user cek
+        $user = User::where('email', $input['email'])->first();
+
+        // user tidak ditemukan & password tidak sesuai
+        if (!$user || !Hash::check($input['password'], $user->password)) {
+            return response()->json(
+                [
+                    'status' => Response::HTTP_UNAUTHORIZED,
+                    'message' => 'Invalid credentials',
+                ],
+                Response::HTTP_UNAUTHORIZED
+            );
+        }
+        $token = $user->createToken('IniAdalahKeyRahasia')->plainTextToken;
+        $data = [
+            'status' => Response::HTTP_OK,
+            'message' => 'User berhasil login',
+            'data' => $user,
+            'token' => $token,
+            'type' => 'Bearer'
+        ];
+        return response()->json($data, Response::HTTP_OK);
+    }
     // user
     public function user() {}
     // logout

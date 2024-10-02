@@ -37,3 +37,4 @@ Route::delete('products/{id}', [ProductController::class, 'destroy']);
 
 // Auth Sanctum
 Route::post('users/register', [AuthController::class, 'register']);
+Route::post('users/login', [AuthController::class, 'login']);

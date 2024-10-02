@@ -27,7 +27,7 @@ Route::get('/test-api', function () {
         'status' => 200,
         'message' => 'Hai, ini adalah test API',
     ]);
-})->middleware('auth:sanctum');
+})->middleware(['auth:api', 'snap-bi']);
 
 // Endpoint API Products
 Route::get('products', [ProductController::class, 'index']);
@@ -55,4 +55,5 @@ Route::post('jwt/login', [AuthJwtController::class, 'login']);
 Route::middleware(['auth:api'])->group(function () {
     Route::get('jwt/profile', [AuthJwtController::class, 'profile']);
     Route::post('jwt/refresh', [AuthJwtController::class, 'refresh']);
+    Route::post('jwt/logout', [AuthJwtController::class, 'logout']);
 });

@@ -10,9 +10,11 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    // global header
-    public const header = [
-        'name' => 'Ihsan'
+    // Variable untuk Custom Header
+    public const Header = [
+        'X-PARTNER-ID' => 'INIXINDO',
+        'X-TIMESTAMP' => '2024-10-02',
+        'X-SIGNATURE' => '123456'
     ];
 
     // register

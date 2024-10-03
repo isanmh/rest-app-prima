@@ -50,6 +50,28 @@ class ProductController extends Controller
         return response()->json($products, Response::HTTP_OK);
     }
 
+    /**
+     * @OA\Get(
+     *      path="/api/products/{id}",
+     *      operationId="show",
+     *      tags={"Product"},
+     *      summary="Get product by id",
+     *      description="Get product by id",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="Product id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(response=200,description="Success",
+     *          @OA\JsonContent()
+     *      ),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
     // detail product
     public function show($id)
     {
@@ -72,6 +94,37 @@ class ProductController extends Controller
         }
     }
 
+
+    /**
+     * @OA\Post(
+     *      path="/api/products",
+     *      operationId="store",
+     *      tags={"Product"},
+     *      summary="Create new product",
+     *      description="Create new product",
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(
+     *                type="object",
+     *                required={"name", "price", "description", "image"},
+     *                @OA\Property(property="name", type="string", example="Product 1"),
+     *                @OA\Property(property="price", type="integer", example="10000"),
+     *                @OA\Property(property="description", type="string", example="Description product 1"),
+     *                @OA\Property(property="image", type="string", format="binary"),
+     *             ),
+     *         ),
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Product created successfully",
+     *         @OA\JsonContent()
+     *     ),
+     *     @OA\Response(response=400, description="Bad request"),
+     *     @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
     // create product
     public function store(Request $request)
     {

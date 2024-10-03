@@ -2,14 +2,10 @@
     "openapi": "3.0.0",
     "info": {
         "title": "API Training",
-        "description": "API documentation Training RESTful API",
+        "description": "API documentation Training RESTful API PT Prima",
         "termsOfService": "http://swagger.io/terms/",
         "contact": {
             "email": "isan@gmail.com"
-        },
-        "license": {
-            "name": "Apache 2.0",
-            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
         },
         "version": "1.0.0"
     },
@@ -154,103 +150,6 @@
                 "responses": {
                     "200": {
                         "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "Product"
-                ],
-                "summary": "Update product by id",
-                "description": "Update product by id",
-                "operationId": "update",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Product id",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "required": [
-                                    "name",
-                                    "price",
-                                    "description",
-                                    "image"
-                                ],
-                                "properties": {
-                                    "name": {
-                                        "type": "string",
-                                        "example": "Product 1"
-                                    },
-                                    "price": {
-                                        "type": "integer",
-                                        "example": "10000"
-                                    },
-                                    "description": {
-                                        "type": "string",
-                                        "example": "Description product 1"
-                                    },
-                                    "image": {
-                                        "type": "string",
-                                        "example": "image.jpg"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Product updated successfully",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "Product"
-                ],
-                "summary": "Delete product by id",
-                "description": "Delete product by id",
-                "operationId": "destroy",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Product id",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Product deleted successfully",
                         "content": {
                             "application/json": {
                                 "schema": {}
